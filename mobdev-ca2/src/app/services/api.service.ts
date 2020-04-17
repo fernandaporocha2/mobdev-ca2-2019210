@@ -13,7 +13,7 @@ export class ApiService {
     }
 
     getEpisode(id) {
-        return this.http.get(`https://breakingbadapi.com/api/episodes/${id}`)
+        return this.http.get('https://breakingbadapi.com/api/episodes/1')
     }
 
     getCharacters() {
@@ -26,5 +26,9 @@ export class ApiService {
 
     getQuotes() {
         return this.http.get('https://breakingbadapi.com/api/quotes')
+    }
+
+    getDeaths() {
+        return this.http.get('https://breakingbadapi.com/api/deaths')
     }
 }
