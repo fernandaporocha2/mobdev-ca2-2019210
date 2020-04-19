@@ -1,9 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>characterDetails</ion-title>
-  </ion-toolbar>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start" defaultHref="/tabs/episodes">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title> {{ character?.name }}</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+	<ion-card *ngIf="character">
+		<ion-card-content>
+            <p>Id: {{ character.char_id }} </p>
+			<p>Name: {{ character.name }} </p>
+            <p>Birthday: {{ character.birthday }}</p>
+            <p>Occupation: {{ character.occupation }}</p>
+            <p>Status: {{ character.status }}</p>
+            <p>Appearance: {{ character.appearance }}</p>
+            <p>Nickname: {{ character.nickname }}</p>
+            <p>Portrayed: {{ character.portrayed }}</p>
+            <img src={{character.img}} alt={{character.name}}/>
+		</ion-card-content>
+	</ion-card>
 </ion-content>
