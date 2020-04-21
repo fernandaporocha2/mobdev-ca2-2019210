@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-     quotes : Array<any>;
+     quotes : Observable<any>;
 
     constructor(private http: HttpClient) { }
 
@@ -30,27 +30,32 @@ export class ApiService {
 
     getQuotes() {
         console.log("getQuotes");
-        let quotes = JSON.parse('[{"quote_id":1,"quote":"I am not in danger, Skyler. I am the danger!","author":"Walter White","series":"Breaking Bad"},{"quote_id":2,"quote":"Stay out of my territory.","author":"Walter White","series":"Breaking Bad"},{"quote_id":3,"quote":"IFT","author":"Skyler White","series":"Breaking Bad"}]');
+        let quotes = this.http.get('[{"quote_id":1,"quote":"I am not in danger, Skyler. I am the danger!","author":"Walter White","series":"Breaking Bad"},{"quote_id":2,"quote":"Stay out of my territory.","author":"Walter White","series":"Breaking Bad"},{"quote_id":3,"quote":"IFT","author":"Skyler White","series":"Breaking Bad"}]');
+        this.http.get('[{"quote_id":1,"quote":"I am not in danger, Skyler. I am the danger!","author":"Walter White","series":"Breaking Bad"},{"quote_id":2,"quote":"Stay out of my territory.","author":"Walter White","series":"Breaking Bad"},{"quote_id":3,"quote":"IFT","author":"Skyler White","series":"Breaking Bad"}]').pipe(map(res => JSON.parse(res.toString()))).subscribe(data => {
+            console.log(data);
+        });
         console.log(quotes);
+        this.http.get('assests/data/redditData.json')
         this.quotes = quotes; 
-        for (let quote of quotes) {
+       
+       /* for (let quote of data) {
             console.log(quote); // 1, "string", false
             console.log(quote.author);
             console.log(quote.quote);
-        }
+        }*/
         return quotes;
         //return this.http.get('https://breakingbadapi.com/api/quotes')
     }
 
     getQuoteByAuthor(author: string) {
         let selectedQuotes;
-        for (let quote of this.quotes){
+       /* for (let quote of this.quotes){
             console.log("getQuoteByAuthor"+quote); 
             if(quote.author.toLowerCase().includes(author.toLowerCase())){
                 console.log("achei"+quote.author); 
                 selectedQuotes.push(quote);
             }
-        }
+        }*/
         console.log("getQuoteByAuthor");
         console.log(JSON.stringify(selectedQuotes));
         return selectedQuotes;
