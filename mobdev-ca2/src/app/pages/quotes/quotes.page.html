@@ -1,13 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Quotes</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title>Quotes</ion-title>
+	</ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="author" (ionChange)="searchChanged($event)" placeholder="Search by Author"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
+    <ion-list>
 		<ion-item button detail lines="inset" *ngFor="let quote of quotes | async">
-			{{ quote.quote }}
+			{{ quote.author }}
 		</ion-item>
 	</ion-list>
+    
 </ion-content>
+
+

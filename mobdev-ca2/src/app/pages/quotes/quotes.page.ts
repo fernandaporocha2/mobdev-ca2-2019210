@@ -11,11 +11,19 @@ import { ApiService } from '../../services/api.service';
 export class QuotesPage implements OnInit {
 
   quotes : Observable<any>;
+  author: string = '';
 
   constructor(private router: Router, private api: ApiService) { }
 
   ngOnInit() {
       this.quotes = this.api.getQuotes();
+  }
+
+  searchChanged() {
+    // Call our service function which returns an Observable
+    console.log("searchChanged");
+    console.log(JSON.stringify(this.author));
+    this.quotes = this.api.getQuoteByAuthor(this.author);
   }
 
 }
