@@ -17,7 +17,7 @@ export class QuotesPage implements OnInit {
 
   ngOnInit() {
       console.log("init");
-      this.quotes = of(this.api.getQuotes());
+      this.quotes = this.api.getQuotes();
       console.log(this.quotes);
   }
 
