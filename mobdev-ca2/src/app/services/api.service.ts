@@ -30,13 +30,12 @@ export class ApiService {
 
     getQuotes() {
         console.log("getQuotes");
-        let oquotes;
+
         this.http.get(('https://breakingbadapi.com/api/quotes')).subscribe(data => {
             this.allQuotes = data as Array<any>;
-            oquotes = data;
         });
 
-        return this.http.get('https://breakingbadapi.com/api/quotes');
+        return this.http.get('https://breakingbadapi.com/api/quotes');;
     }
 
     getQuoteByAuthor(author: string) {
@@ -51,7 +50,6 @@ export class ApiService {
         console.log("getQuoteByAuthor");
         console.log(JSON.stringify(selectedQuotes));
         return of(selectedQuotes);
-        //return this.http.get(`https://breakingbadapi.com/api/quote?author=${author}`)
     }
 
     getQuote(id) {
