@@ -36,24 +36,25 @@ export class ApiService {
 */
         this.http.get(('https://breakingbadapi.com/api/quotes')).subscribe(data => {
             this.allQuotes = data as Array<any>;
-            console.log("data");
+          /*  console.log("data");
             console.log(data);
             console.log("this.myquotes");
             console.log(this.allQuotes);
             console.log("of this.quotes");
             console.log(JSON.stringify(of(this.allQuotes)));
             console.log("pela url");
-            console.log(JSON.stringify(this.http.get('https://breakingbadapi.com/api/quotes')));
+            console.log(JSON.stringify(this.http.get('https://breakingbadapi.com/api/quotes')));*/
         });
-       
+        let obs :Observable<any>;
+        obs =  of(this.allQuotes);
         console.log("end getQuotes");
         return this.http.get(('https://breakingbadapi.com/api/quotes'));
-        //return of(this.quotes);
+        //return obs;
        
     }
 
     getQuoteByAuthor(author: string) {
-        let selectedQuotes;
+        let selectedQuotes: Array<any>;
         for (let quote of this.allQuotes){
             console.log("getQuoteByAuthor"+quote); 
             if(quote.author.toLowerCase().includes(author.toLowerCase())){
