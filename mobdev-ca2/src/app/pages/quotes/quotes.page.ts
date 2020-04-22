@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -16,7 +16,9 @@ export class QuotesPage implements OnInit {
   constructor(private router: Router, private api: ApiService) { }
 
   ngOnInit() {
-      this.quotes = this.api.getQuotes();
+      console.log("init");
+      this.quotes = of(this.api.getQuotes());
+      console.log(this.quotes);
   }
 
   searchChanged() {
@@ -24,6 +26,8 @@ export class QuotesPage implements OnInit {
     console.log("searchChanged");
     console.log(JSON.stringify(this.author));
     this.quotes = this.api.getQuoteByAuthor(this.author);
+    console.log(this.quotes);
+     
   }
 
 }

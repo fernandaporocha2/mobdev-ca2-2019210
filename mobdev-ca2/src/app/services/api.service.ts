@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
 
-     quotes : Observable<any>;
+    allQuotes : Array<any>;
 
     constructor(private http: HttpClient) { }
 
@@ -30,35 +30,40 @@ export class ApiService {
 
     getQuotes() {
         console.log("getQuotes");
-        let quotes = this.http.get('[{"quote_id":1,"quote":"I am not in danger, Skyler. I am the danger!","author":"Walter White","series":"Breaking Bad"},{"quote_id":2,"quote":"Stay out of my territory.","author":"Walter White","series":"Breaking Bad"},{"quote_id":3,"quote":"IFT","author":"Skyler White","series":"Breaking Bad"}]');
-        this.http.get('[{"quote_id":1,"quote":"I am not in danger, Skyler. I am the danger!","author":"Walter White","series":"Breaking Bad"},{"quote_id":2,"quote":"Stay out of my territory.","author":"Walter White","series":"Breaking Bad"},{"quote_id":3,"quote":"IFT","author":"Skyler White","series":"Breaking Bad"}]').pipe(map(res => JSON.parse(res.toString()))).subscribe(data => {
-            console.log(data);
+        /*this.http.get(('https://breakingbadapi.com/api/quotes')).pipe(map(res => JSON.parse(res.toString()))).subscribe(data => {
+			this.quotes = data;
         });
-        console.log(quotes);
-        this.http.get('assests/data/redditData.json')
-        this.quotes = quotes; 
+*/
+        this.http.get(('https://breakingbadapi.com/api/quotes')).subscribe(data => {
+            this.allQuotes = data as Array<any>;
+            console.log("data");
+            console.log(data);
+            console.log("this.myquotes");
+            console.log(this.allQuotes);
+            console.log("of this.quotes");
+            console.log(JSON.stringify(of(this.allQuotes)));
+            console.log("pela url");
+            console.log(JSON.stringify(this.http.get('https://breakingbadapi.com/api/quotes')));
+        });
        
-       /* for (let quote of data) {
-            console.log(quote); // 1, "string", false
-            console.log(quote.author);
-            console.log(quote.quote);
-        }*/
-        return quotes;
-        //return this.http.get('https://breakingbadapi.com/api/quotes')
+        console.log("end getQuotes");
+        return this.http.get(('https://breakingbadapi.com/api/quotes'));
+        //return of(this.quotes);
+       
     }
 
     getQuoteByAuthor(author: string) {
         let selectedQuotes;
-       /* for (let quote of this.quotes){
+        for (let quote of this.allQuotes){
             console.log("getQuoteByAuthor"+quote); 
             if(quote.author.toLowerCase().includes(author.toLowerCase())){
                 console.log("achei"+quote.author); 
                 selectedQuotes.push(quote);
             }
-        }*/
+        }
         console.log("getQuoteByAuthor");
         console.log(JSON.stringify(selectedQuotes));
-        return selectedQuotes;
+        return of(selectedQuotes);
         //return this.http.get(`https://breakingbadapi.com/api/quote?author=${author}`)
     }
 
