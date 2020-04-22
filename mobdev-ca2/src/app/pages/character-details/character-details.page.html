@@ -1,9 +1,23 @@
 <ion-header>
 	<ion-toolbar color="primary">
-		<ion-buttons slot="start" defaultHref="/tabs/episodes">
+		<ion-buttons slot="start" defaultHref="/tabs/characters">
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-title> {{ character?.name }}</ion-title>
+        <ion-buttons slot="end">
+			<ion-button (click)="neutreCharacter()" *ngIf="isLiked">
+				<ion-icon name="thumbs-up" slot="icon-only"></ion-icon>
+			</ion-button>
+			<ion-button (click)="likeCharacter()" *ngIf="!isLiked">
+				<ion-icon name="thumbs-up-outline" slot="icon-only"></ion-icon>
+			</ion-button>
+            <ion-button (click)="neutreCharacter()" *ngIf="isDisliked">
+				<ion-icon name="thumbs-down" slot="icon-only"></ion-icon>
+			</ion-button>
+			<ion-button (click)="dislikeCharacter()" *ngIf="!isDisliked">
+				<ion-icon name="thumbs-down-outline" slot="icon-only"></ion-icon>
+			</ion-button>
+        </ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
