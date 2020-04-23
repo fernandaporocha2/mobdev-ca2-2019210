@@ -30,4 +30,11 @@ export class QuotesPage implements OnInit {
      
   }
 
+  openDetails(quote){
+      let quoteId = quote.quote_id;
+      console.log("quote.id");
+      console.log(quoteId);
+      this.router.navigateByUrl(`/tabs/quotes/${quoteId}`);
+  }
+
 }
