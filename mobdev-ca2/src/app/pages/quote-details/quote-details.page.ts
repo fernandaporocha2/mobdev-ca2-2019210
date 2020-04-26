@@ -15,7 +15,9 @@ export class QuoteDetailsPage implements OnInit {
     constructor(private activatedRoute: ActivatedRoute, private api: ApiService) { }
 
     ngOnInit() {
+        //Geting the quote id
         this.quoteId = this.activatedRoute.snapshot.paramMap.get('id');
+        //Getting the quote details by its Id
         this.api.getQuote(this.quoteId).subscribe(res => {
             this.quote = res[0];
             console.log(JSON.stringify(this.quote.id));

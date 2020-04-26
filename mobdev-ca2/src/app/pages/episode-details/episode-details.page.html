@@ -1,9 +1,13 @@
 <ion-header>
+	<!-- Toolbar theme -->
 	<ion-toolbar color="primary">
+		<!-- Back navigation to episodes page -->
 		<ion-buttons slot="start" defaultHref="/tabs/(episodes:episodes)">
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
+		<!-- It Loads the name of the current episode in the title -->
 		<ion-title> {{ episode?.title }}</ion-title>
+		<!-- Like and dislike button bar -->
 		<ion-buttons slot="end">
 			<ion-button (click)="neutreEpisode()" *ngIf="isLiked">
 				<ion-icon name="thumbs-up" slot="icon-only"></ion-icon>
@@ -22,14 +26,37 @@
 </ion-header>
 
 <ion-content>
+	<!-- Details of the selected episode -->
 	<ion-card *ngIf="episode">
-		<ion-card-content>
-			<p>Id: {{ episode.episode_id }} </p>
-			<p>Title: {{ episode.title }} </p>
-			<p>Season: {{ episode.season }} </p>
-			<p>Episode: {{ episode.episode }} </p>
-			<p>Air Date: {{ episode.air_date }} </p>
-			<p>Characters: {{ episode.characters }} </p>
-		</ion-card-content>
+    <ion-card>
+			<ion-card-content>
+				<b>Id:</b> {{ episode.episode_id }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Title:</b> {{ episode.title }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Season:</b> {{ episode.season }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Episode:</b> {{ episode.episode }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Air Date:</b> {{ episode.air_date }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Characters:</b> {{ episode.characters }}
+			</ion-card-content>
+		</ion-card>
 	</ion-card>
 </ion-content>

@@ -4,37 +4,31 @@ import { Observable, of } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 
 @Component({
-  selector: 'app-quotes',
-  templateUrl: './quotes.page.html',
-  styleUrls: ['./quotes.page.scss'],
+    selector: 'app-quotes',
+    templateUrl: './quotes.page.html',
+    styleUrls: ['./quotes.page.scss'],
 })
 export class QuotesPage implements OnInit {
 
-  quotes : Observable<any>;
-  author: string = '';
+    quotes: Observable<any>;
+    author: string = '';
 
-  constructor(private router: Router, private api: ApiService) { }
+    constructor(private router: Router, private api: ApiService) { }
 
-  ngOnInit() {
-      console.log("init");
-      this.quotes = this.api.getQuotes();
-      console.log(this.quotes);
-  }
+    ngOnInit() {
+        //get all the quotes
+        this.quotes = this.api.getQuotes();
+    }
 
-  searchChanged() {
-    // Call our service function which returns an Observable
-    console.log("searchChanged");
-    console.log(JSON.stringify(this.author));
-    this.quotes = this.api.getQuoteByAuthor(this.author);
-    console.log(this.quotes);
-     
-  }
+    //This function searches all the quotes by authors name that contains the user input
+    searchQuotes() {
+        this.quotes = this.api.getQuoteByAuthor(this.author);
+    }
 
-  openDetails(quote){
-      let quoteId = quote.quote_id;
-      console.log("quote.id");
-      console.log(quoteId);
-      this.router.navigateByUrl(`/tabs/quotes/${quoteId}`);
-  }
+    //This function gets the quoteId and opens the details page of the selected quote
+    openDetails(quote) {
+        let quoteId = quote.quote_id;
+        this.router.navigateByUrl(`/tabs/quotes/${quoteId}`);
+    }
 
 }

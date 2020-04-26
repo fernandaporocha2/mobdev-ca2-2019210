@@ -1,19 +1,37 @@
 <ion-header>
+	<!-- Toolbar theme -->
 	<ion-toolbar color="primary">
-		<ion-buttons slot="start" defaultHref="/tabs/(episodes:episodes)">
+		<!-- Back navigation to Quotes page-->
+		<ion-buttons slot="start" defaultHref="/tabs/(quotes:quotes)">
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
+		<!-- Loading the selected quote in the title -->
 		<ion-title> {{ quote?.quote }} </ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
+	<!-- Details of the selected quote -->
 	<ion-card *ngIf="quote">
-		<ion-card-content>
-			<p>Id: {{ quote.quote_id }} </p>
-			<p>Author: {{ quote.author }} </p>
-			<p>Quote: {{ quote.quote }} </p>
-			<p>Series: {{ quote.series }} </p>
-		</ion-card-content>
+		<ion-card>
+			<ion-card-content>
+				<b>Id:</b> {{ quote.quote_id }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Author:</b> {{ quote.author }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Quote:</b> {{ quote.quote }}
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<b>Series:</b> {{ quote.series }}
+			</ion-card-content>
+		</ion-card>
 	</ion-card>
 </ion-content>

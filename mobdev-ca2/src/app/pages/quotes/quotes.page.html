@@ -1,15 +1,22 @@
 <ion-header>
-	<ion-toolbar>
+	<!-- Toolbar theme -->
+	<ion-toolbar color="primary">
 		<ion-title>Quotes</ion-title>
 	</ion-toolbar>
+	<!-- https://ionicframework.com/docs/api/searchbar -->
+    <!-- https://www.freecodecamp.org/news/how-to-build-your-first-ionic-4-app-with-api-calls-f6ea747dc17a/ -->
+    <!-- The search bar. Everytime something is typed the function searchQuotes will be called -->
+    <!-- The value typed by the user will be store in the ngModel called author -->
     <ion-toolbar>
-        <ion-searchbar [(ngModel)]="author" (ionChange)="searchChanged($event)" placeholder="Search by Author"></ion-searchbar>
+        <ion-searchbar [(ngModel)]="author" (ionChange)="searchQuotes($event)" placeholder="Search by Author"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-list>
-		<ion-item button detail lines="inset" *ngFor="let quote of quotes | async" (click)="openDetails(quote)">
+		<!-- Using ngFor for go through all the quotes of the array, 
+    	defining the funtion that will be called for show the quote-details of each quote -->
+    	<ion-item button detail lines="inset" *ngFor="let quote of quotes | async" (click)="openDetails(quote)">
 			{{ quote.quote }}
 		</ion-item>
 	</ion-list>
