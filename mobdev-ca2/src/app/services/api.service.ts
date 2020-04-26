@@ -9,14 +9,11 @@ import { Observable, of } from 'rxjs';
 export class ApiService {
 
     allQuotes: Array<any>;
-    allDeaths: Array<any>;
-    allDeathResponsibles: Array <any> = [];
 
     constructor(private http: HttpClient) { }
 
     //It returns all the episodes
     getEpisodes() {
-        this.getDeaths();
         return this.http.get('https://breakingbadapi.com/api/episodes')
     }
 
@@ -74,64 +71,8 @@ export class ApiService {
         return this.http.get(`https://breakingbadapi.com/api/quotes/${id}`)
     }
 
-    //It get all the deaths and stores it in the allDeaths variable
-    getDeaths() {
-        console.log("getDeaths");
-        this.http.get(('https://breakingbadapi.com/api/deaths')).subscribe(data => {
-            this.allDeaths = data as Array<any>;
-            console.log(this.allDeaths);
-            console.log(data);
-        });
-    }
-
-    //This function will return all the death responsibles whitout data repetition
-    getResponsibles (){
-        console.log("getResponsibles");
-        //It goes through all the deaths
-         for (let death of this.allDeaths) {
-            console.log("getDeaths " + death.responsible);
-            //https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
-            //If the responsible of the currente death is not included in the allDeathResponsibles array
-            //It will be included, otherwise it will go to the next one
-            if (!(this.allDeathResponsibles.includes(death.responsible))){
-                //https://www.tutorialspoint.com/typescript/typescript_array_push.htm
-                this.allDeathResponsibles.push(death.responsible);
-                console.log("add " + death.responsible);
-            }
-        }
-        //https://www.tutorialspoint.com/typescript/typescript_array_sort.htm
-        //It sorts the allDeathResponsibles array
-        this.allDeathResponsibles.sort();
-        console.log("this.allDeathResponsibles");
-        console.log(this.allDeathResponsibles);
-        return this.allDeathResponsibles;
-    }
-
-    //This function will filter the responsibles according to the input parameter  
-    filterResponsible(input: string) {
-        //https://www.typescriptlang.org/docs/handbook/basic-types.html#array
-        //Creation and initialization of the selectedResponsibles variable
-        //that will store all the responsibles that contains the input parameter 
-        let selectedResponsibles: any[] = [];
-        //It goes through all the responsibles
-        for (let responsible of this.allDeathResponsibles) {
-            console.log("search Responsible" + responsible);
-            https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
-            //If verifies if the current responsible contains the input paramenter
-            //If it contains it will add it to the selectedResponsibles arrays
-            if (responsible.toLowerCase().includes(input.toLowerCase())) {
-                console.log("achei" + responsible);
-                //https://www.tutorialspoint.com/typescript/typescript_array_push.htm
-                selectedResponsibles.push(responsible);
-            }
-        }
-        console.log("getDeathByResponsible");
-        console.log(JSON.stringify(selectedResponsibles));
-        return selectedResponsibles;
-    }
-
     //It returns the death count by responsible name
-    getDeath(responsible) {
+    getDeathCount(responsible) {
         return this.http.get(`https://breakingbadapi.com/api/death-count?name=${responsible}`)
     }
 }
