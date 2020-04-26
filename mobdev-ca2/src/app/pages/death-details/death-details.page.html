@@ -1,0 +1,20 @@
+<ion-header>
+	<!-- Toolbar theme -->
+	<ion-toolbar color="primary">
+		<!-- Back navigation -->
+		<ion-buttons slot="start" defaultHref="/tabs/(deaths:deaths)">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<!-- Loading the responsible name in the title -->
+		<ion-title> {{ death?.name }}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-card *ngIf="death">
+		<ion-card-content>
+			<p>Name: {{ death.name }} </p>
+			<p>Death Count: {{ death.deathCount }} </p>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

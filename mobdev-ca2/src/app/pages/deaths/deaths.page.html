@@ -1,13 +1,24 @@
 <ion-header>
-  <ion-toolbar>
+  <!-- Toolbar theme -->
+  <ion-toolbar color="primary">
     <ion-title>Deaths</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <!-- https://ionicframework.com/docs/api/searchbar -->
+    <!-- https://www.freecodecamp.org/news/how-to-build-your-first-ionic-4-app-with-api-calls-f6ea747dc17a/ -->
+    <!-- The search bar. Everytime something is typed the function searchResponsible will be called -->
+    <!-- The value typed by the user will be store in the ngModel called responsible -->
+    <ion-searchbar [(ngModel)]="responsible" (ionChange)="searchResponsible($event)"
+      placeholder="Search Deaths by Responsible"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-list>
-		<ion-item button detail lines="inset" *ngFor="let death of deaths | async">
-			{{ death.death }}
-		</ion-item>
-	</ion-list>
+  <ion-list>
+    <!-- Using ngFor for go through all the responsibles of the array, 
+    defining the funtion that will be called for show the death-count of each responsible-->
+    <ion-item button detail lines="inset" *ngFor="let resp of responsibles" (click)="openDetails(resp)">
+      {{ resp }}
+    </ion-item>
+  </ion-list>
 </ion-content>
